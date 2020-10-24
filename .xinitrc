@@ -53,7 +53,8 @@ while true; do
 	sleep 1s
 done &
 
-exec ~/.fehbg &
+xrandr -s 1280x800 &
+~/.fehbg &
 exec dwm
 
 
