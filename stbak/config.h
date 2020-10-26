@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
+static char *font = "DejaVu Sans Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font2[] = { "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true" };
 static int borderpx = 2;
 
 /*
@@ -110,30 +110,225 @@ unsigned int tabspaces = 8;
 /* bg opacity */
 float alpha = 1;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Terminal colors (16 first used in escape sequence) */
+/* more colors can be added after 255 to use with DefaultXX */
+/* 256 -> cursor */
+/* 257 -> rev cursor*/
+/* 258 -> bg */
+/* 259 -> fg */    
+
+/* hard contrast: #1d2021 / soft contrast: #32302f */
+
+
 static const char *colorname[] = {
-	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	"#cc241d",
-	"#98971a",
-	"#d79921",
-	"#458588",
-	"#b16286",
-	"#689d6a",
-	"#a89984",
-	"#928374",
-	"#fb4934",
-	"#b8bb26",
-	"#fabd2f",
-	"#83a598",
-	"#d3869b",
-	"#8ec07c",
-	"#ebdbb2",
+
+
+	 /* black   */
+	 /* red     */
+	 /* green   */
+	 /* yellow  */
+	 /* blue    */
+	 /* magenta */
+	 /* cyan    */
+	 /* white   */
+	 /*Bright_black   */
+	 /*Bright_red     */
+	 /*Bright_green   */
+	 /*Bright_yellow  */
+	 /*Bright_blue    */
+	 /*Bright_magenta */
+	 /*Bright_cyan    */
+	 /*Bright_white   */
+	/* [255] = 0 */
+	/* 256 -> cursor */
+	/* 257 -> rev cursor*/
+	/* 258 -> bg */
+	/* 259 -> fg */    
+
+
+
+
+
+	/* LUKE */
+	/*
+	*"#282828",
+	*"#cc241d",
+	*"#98971a",
+	*"#d79921",
+	*"#458588",
+	*"#b16286",
+	*"#689d6a",
+	*"#a89984",
+	*"#928374",
+	*"#fb4934",
+	*"#b8bb26",
+	*"#fabd2f",
+	*"#83a598",
+	*"#d3869b",
+	*"#8ec07c",
+	*"#ebdbb2",
+	*[255] = 0,
+	*"#add8e6", 
+	*"#555555", 
+	*"#282828", 
+	*"#ebdbb2", 
+	*/
+
+	/* OLD-MANJARO */
+	/*
+  	*"#232629", 
+  	*"#f11235", 
+  	*"#02d849", 
+  	*"#ffb627", 
+  	*"#00a6fb", 
+  	*"#f15ee3", 
+  	*"#0dd9d6", 
+  	*"#f8f8f2", 
+  	*"#232629",
+  	*"#f11235",
+  	*"#02d849",
+  	*"#ffb627",
+  	*"#00a6fb",
+  	*"#f15ee3",
+  	*"#0dd9d6",
+  	*"#f8f8f2",
+	*[255] = 0,
+	*"#add8e6", 
+	*"#555555", 
+	*"#232629", 
+	*"#f8f8f2", 
+	*/
+
+	/* Google-Dark */
+	/*
+	 *"#1d1f21",
+	 *"#cc342b",
+	 *"#198844",
+	 *"#fba922",
+	 *"#3971ed",
+	 *"#a36ac7",
+	 *"#3971ed",
+	 *"#c5c8c6",
+	 *"#969896",
+	 *"#cc342b",
+	 *"#198844",
+	 *"#fba922",
+	 *"#3971ed",
+	 *"#a36ac7",
+	 *"#3971ed",
+	 *"#ffffff",
+	 *[255] = 0,
+	 *"#add8e6",
+	 *"#555555",
+	 *"#1d1f21",
+	 *"#c5c8c6",
+	 */
+
+	 /* BRODIE */
+	 /*
+	 *"#191919",
+	 *"#b02626",
+	 *"#40a62f",
+	 *"#f2e635",
+	 *"#314ad0",
+	 *"#b30ad0",
+	 *"#32d0fc",
+	 *"#acadb1",
+     *"#676f78",
+     *"#b55454",
+     *"#78a670",
+     *"#faf380",
+     *"#707fd0",
+     *"#c583d0",
+     *"#8adaf1",
+     *"#e0e3e7",
+	 *[255] = 0,
+	 *"#add8e6",
+	 *"#555555",
+	 *"#191919",
+	 *"#d8dee9",
+	 */
+
+	/* AppleJaro */
+	/*
+	 *
+   	 *"#232629",
+   	 *"#d81c1c",
+   	 *"#1fb714",
+   	 *"#fbf305",
+   	 *"#3273c4",
+   	 *"#f15ee3",
+   	 *"#0dd9d6",
+   	 *"#c0c0c0",
+   	 *"#c0c0c0",
+   	 *"#d81c1c",
+   	 *"#1fb714",
+   	 *"#fbf305",
+   	 *"#3273c4",
+   	 *"#f15ee3",
+   	 *"#0dd9d6",
+   	 *"#f8f8f2",
+	 *[255] = 0,
+	 *"#add8e6", 
+	 *"#555555", 
+	 *"#232629", 
+	 *"#f8f8f2", 
+	 */
+
+
+
+
+
+	/* IN-USE */ 
+
+	/* AppleJaro */
+
+
+	"#232629",
+	"#d81c1c",
+	"#1fb714",
+	"#fbf305",
+	"#3273c4",
+	"#f15ee3",
+	"#0dd9d6",
+	"#c0c0c0",
+	"#c0c0c0",
+	"#d81c1c",
+	"#1fb714",
+	"#fbf305",
+	"#3273c4",
+	"#f15ee3",
+	"#0dd9d6",
+	"#f8f8f2",
 	[255] = 0,
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+	"#add8e6", 
+	"#555555", 
+	"#232629", 
+	"#f8f8f2", 
+
+
+	
+
+
+	
+
 };
 
 
