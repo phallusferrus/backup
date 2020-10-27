@@ -104,15 +104,12 @@ alias R='ranger'
 alias PP='cd; cd phallusferrus.github.io/blogs/works/python'
 alias C='cd; cd phallusferrus.github.io/blogs/works/cspace'
 alias CC='./gccc.sh'
-alias rm='rm -i'
+#alias rm='rm -i'
 alias IP='curl ifconfig.me'
 alias pigsay='C; ./pigsay.sh'
 alias PIG='pigsay'
 alias pigpic='C; ./pigpic.sh'
 alias ..='cd ..'
-alias mpv='devour mpv'
-alias feh='devour feh'
-alias zathura='devour zathura'
 
 xhost +local:root > /dev/null 2>&1
 
