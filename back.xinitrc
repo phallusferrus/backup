@@ -48,7 +48,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-#SET DISPLAY THIS WAS IN MENTAL OUTLAWS EXPLANATION FOR XRANDR
+#CLIPMENU
 systemctl --user import-environment DISPLAY
 
 ##Can't do CPU-Temp on VM (sensors) and can't figure out CPU % but the examples remain on DT gitlab and OldTechBloke gitlab so you can check em out and this is as much relevant info as I could gather
@@ -69,44 +69,119 @@ while true; do
 	#DRIVE SPACE
 	echo "$(df -h | awk 'NR==4{print $4}')" > /home/qwe/dwmscripts/dwmhdd.txt
 	#UPDATE
-	CUPDATE=$(checkupdates 2> /dev/null | wc -l)
 	UTOKE="?"
+	echo "$UTOKE" > /home/qwe/dwmscripts/dwmupdate.txt
+	CUPDATE=$(checkupdates 2> /dev/null | wc -l)
 	if [ $CUPDATE == 0 ]
 	then
-		UTOKE="#"
+		UTOKE=""
 	else
-		UTOKE="!"
+		UTOKE=""
 	fi
 	echo "$UTOKE" > /home/qwe/dwmscripts/dwmupdate.txt
 
 	#WEATHER
-   	echo ? > /home/qwe/dwmscripts/dwmweather.txt
-	WNOW="$(curl -s wttr.in/Longview,WA?format=%t)"
-	WGUD="${WNOW//[!0-9]/}"
-	echo "scale=0;($WGUD - 32) / 1.8" | bc -l > /home/qwe/dwmscripts/dwmweather.txt
+	WNOW="$(curl -s wttr.in/98625?format=%f)"
+	WGUDD="${WNOW//[!0-9]/}"
+	WGUD="$(echo $WGUDD - 32 | bc -l)"
+	echo "scale=0;$WGUD / 1.8" | bc -l > /home/qwe/dwmscripts/dwmweather.txt
+	SSETT="$(curl -s wttr.in/98625?format=%s)"
+	SSET="${SSETT//[!0-9]/}"
+	SRIZZ="$(curl -s wttr.in/98625?format=%D)"
+	SRIZ="${SRIZZ//[!0-9]/}"
+	TNOW="$(date | awk '{print $4}')"
+	NOW="${TNOW//[!0-9]/}"
+	WWICON="$(curl -s wttr.in/Kalama,WA?format=%C)"
+	if [ $NOW -gt $SRIZ ] && [ $NOW -lt $SSET ]
+	then
+		WICONN="$(curl -s wttr.in/Kalama,WA?format=%C)"
+		WICON="$(cat /home/qwe/dwmscripts/allicons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
+	elif [ $WWICON == 'Clear']
+	then
+		MPHAZ="$(curl -s wttr.in/98625?format=%M)"
+		if [ $MPHAZ -lt 2 ]
+		then
+			WICON="🌕"
+		elif [ $MPHAZ -lt 13 ]
+		then
+			WICON="🌘"
+		elif [ $MPHAZ == 14 ]
+		then
+			WICON="🌚"
+		elif [ $MPHAZ -lt 16 ]
+		then
+			WICON="🌑"
+		elif [ $MPHAZ -lt 19 ]
+		then
+			WICON="🌒"
+		elif [ $MPHAZ -lt 24 ]
+		then	
+			WICON="🌓"
+		elif [ $MPHAZ < 27 ]
+		then
+			WICON="🌔"
+		else
+			WICON="🌕"
+		fi
+	else
+		WICONN="$(curl -s wttr.in/Kalama,WA?format=%C)"
+		WICON="$(cat /home/qwe/dwmscripts/nighticons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
+
+		
+	fi
+	echo $WICON > /home/qwe/dwmscripts/dwmwicon.txt
+
+
 
 	#SLEEP
-	sleep 900
+	sleep 900s
 done &
 
 
 #CONSTANT UPDATES
 while true; do
-	HDD=$(< /home/qwe/dwmscripts/dwmhdd.txt)
-	RAMB=$(free -h| awk 'NR==2{print $3}')
-	RAM="${RAMB//i}"
-	UTOKEN=$(< /home/qwe/dwmscripts/dwmupdate.txt)
-	WTOKEN=$(< /home/qwe/dwmscripts/dwmweather.txt)
-	xsetroot -name "  DRIVE:$HDD  |  RAM:$RAM  |  $UTOKEN  |  $WTOKEN C  |  $(date +%a\ %b%d\ %R)"
+
+	#HDD=$(< /home/qwe/dwmscripts/dwmhdd.txt)
+	#RAMB=$(free -h| awk 'NR==2{print $3}')
+	#RAM="${RAMB//i}"
+	#UTOKEN=$(< /home/qwe/dwmscripts/dwmupdate.txt)
+
+	#CPUTEMP="$(sensors|awk 'BEGIN{i=0;t=0;b=0}/id [0-9]/{b=$4};/Core/{++i;t+=$3}END{if(i>0){printf("%0.1f\n",t/i)}else{sub(/[^0-9.]/,"",b);print b}}')"
+	##CTTOKEN="$(sensors | awk 'NR==3{print $4}')"
+	##CPUTEMP="${CTTOKEN//[!0-9]/}"
+
+	#BTOKEN="$(acpi | awk '{print $4}')"
+	#BAT="${BTOKEN//[!0-9]/}"
+
+	#WTOKEN=$(< /home/qwe/dwmscripts/dwmweather.txt)
+
+	##AMUTE="$(amixer | awk 'NR==5{print $6}')"
+	##if [ $AMUTE == "[off]" ]
+	##then
+	##	ATOKEN="M"
+	##else
+	##	ATOKE="$(amixer | awk 'NR==5{print $4}')"
+	##	ATOKEN="${ATOKE//[!0-9]/}"
+	##fi
+
+	#ATOKEN=$(< /home/qwe/dwmscripts/dwmaudio.txt)
+
+	#xsetroot -name "  $HDD  |  RAM:$RAM  |  CPU:$CPUTEMP  |  B:$BAT %  |  $UTOKEN  |  $WTOKEN C  |  $ATOKEN  |  $(date +%a\ %b%d\ %R)"
+	/home/qwe/dwmscripts/dwmbarrefresh.sh
 	sleep 2s
 done &
 
-
-
-
-clipmenud &
-xrandr -s 1280x800 &
+#Udiskie boot daemon...
+udiskie &
+#
+#Random Wallaper on Boot (I have it update on the hour now)
+#feh --bg-scale --randomize ~/wallpapes/*
+#
+#Background load on Boot
 ~/.fehbg &
+#Clipboard daemon
+clipmenud &
+#WM
 exec dwm
 
 

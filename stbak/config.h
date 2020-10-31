@@ -6,7 +6,10 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "DejaVu Sans Mono:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true" };
+static char *font2[] = {
+   	"Font Awesome 5:pixelsize=12:antialias=true:autohint=true",
+	"Symbola:pixelsize=12:antialias=true:autohint=true",
+};
 static int borderpx = 2;
 
 /*
@@ -109,17 +112,6 @@ unsigned int tabspaces = 8;
 
 /* bg opacity */
 float alpha = 1;
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -291,9 +283,6 @@ static const char *colorname[] = {
 	 *"#232629", 
 	 *"#f8f8f2", 
 	 */
-
-
-
 
 
 	/* IN-USE */ 

@@ -1,13 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
+#include "layouts.c"
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JoyPixels:size=9" };
-static const char dmenufont[]       = "JoyPixels:size=9";
+static const char *fonts[]          = { "DeJaVu Sans Mono:size=9", "Font Awesome:size=9", "Symbola:size=9" };
+static const char dmenufont[]       = "DeJaVu Sans Mono:size=9";
 /* Background Color */
 static const char col_gray1[]       = "#232629";
 /* Inactive Window Border */
@@ -26,7 +28,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 /*static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };*/
-static const char *tags[] = { ">", "@", "#", "$", "%", "^", "&", "*", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 
 static const Rule rules[] = {
@@ -44,7 +46,7 @@ static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
-#include "layouts.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -89,13 +91,13 @@ static Key keys[] = {
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,						XK_w,	   spawn,		   {.v = webcmd } },
 	{ MODKEY, 						XK_semicolon, spawn,       {.v = clipcmd } },
-	{ MODKEY,						XK_o, 		spawn,         {.v = alsamute } },
-	{ MODKEY,						XK_p, 		spawn,         {.v = alsadown } },
-	{ MODKEY,						XK_bracketleft, spawn,     {.v = alsaup } },
-	{ MODKEY,						XK_bracketright, spawn,	   {.v = brightdown } },
-	{ MODKEY,						XK_backslash,	spawn,     {.v = brightup } },
-	{ MODKEY,						XK_grave, spawn,	   	   {.v = keybup } },
-	{ MODKEY | Mod1Mask,			XK_grave,	spawn,         {.v = keybdown } },
+	{ 0,							0x1008ff12, 		spawn,         {.v = alsamute } },
+	{ 0,							0x1008ff11, 		spawn,         {.v = alsadown } },
+	{ 0,							0x1008ff13, spawn,     {.v = alsaup } },
+	{ 0,							0x1008ff03, spawn,	   {.v = brightdown } },
+	{ 0,							0x1008ff02,	spawn,     {.v = brightup } },
+	{ 0,							0x1008ff05,	spawn,   	   {.v = keybup } },
+	{ 0,							0x1008ff06,	spawn,         {.v = keybdown } },
 	{ MODKEY,                     	XK_f,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -103,8 +105,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },*/
 	{ Mod1Mask,                     XK_h,      setmfact,       {.f = -0.05} },
 	{ Mod1Mask,                     XK_l,      setmfact,       {.f = +0.05} },
-	{ Mod1Mask, 					XK_j,	   movestack,	   {.i = -1} },
-	{ Mod1Mask, 					XK_k,	   movestack,	   {.i = +1} },
+	{ Mod1Mask, 					XK_k,	   movestack,	   {.i = -1} },
+	{ Mod1Mask, 					XK_j,	   movestack,	   {.i = +1} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,  			    		XK_q,      killclient,     {0} },
@@ -144,7 +146,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY | ShiftMask,         Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
