@@ -43,6 +43,8 @@ case ${TERM} in
 		;;
 esac
 
+PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+
 use_color=true
 
 # Set colorful PS1 only on colorful terminals.
@@ -98,7 +100,7 @@ alias more=less
 alias ls='ls -ah --color=auto'
 alias P='cd; cd  phallusferrus.github.io'
 alias L='cd; cd Desktop/schoolin/Lingua-Latina'
-alias M='cd; cd Desktop/musics'
+alias M='cd; cd Music'
 alias Git='cd; . Desktop/giterdone.txt'
 alias R='ranger'
 alias PP='cd; cd phallusferrus.github.io/blogs/works/python'
@@ -110,6 +112,7 @@ alias pigsay='C; ./pigsay.sh'
 alias PIG='pigsay'
 alias pigpic='C; ./pigpic.sh'
 alias ..='cd ..'
+alias Weather='curl v2d.wttr.in/Kalama,WA?m'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -163,4 +166,5 @@ export LS_COLORS="di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01
 
 export VISUAL=vim;
 export EDITOR=vim;
+
 

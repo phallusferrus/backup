@@ -1,0 +1,14 @@
+
+## BRIGHTNESS
+
+/sys/class/backlight/intel_backlight/brightness
+
+SU echo 256 > brightness
+
+
+
+## Keyboard LED
+
+/sys/class/leds/smc\:\:kbd_backlight/brightnes
+chekc max brigtness then
+SU echo blah > brightness
