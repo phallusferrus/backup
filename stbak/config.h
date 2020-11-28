@@ -9,6 +9,7 @@ static char *font = "DejaVu Sans Mono:pixelsize=14:antialias=true:autohint=true"
 static char *font2[] = {
    	"Font Awesome 5:pixelsize=12:antialias=true:autohint=true",
 	"Symbola:pixelsize=12:antialias=true:autohint=true",
+	"JoyPixels:pixelsize=10:antialias=true:autohint=true",
 };
 static int borderpx = 2;
 

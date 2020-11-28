@@ -6,7 +6,11 @@ EX="$(cat darksky.html | grep 'summary swap')"
 
 VAL="$(echo $EX | digitextractor)"
 
-echo "$VAL" > /home/qwe/dwmscripts/dwmdarksky.txt
+echo " $VAL" > /home/qwe/dwmscripts/dwmdarksky.txt
 
 rm darksky.html
+
+#WICON="$(curl v2d.wttr.in/Kalama,WA?m | awk 'NR==39{print $2}')"
+
+#echo $WICON > /home/qwe/dwmscripts/dwmwicon.txt
 

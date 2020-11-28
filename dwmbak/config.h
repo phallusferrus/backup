@@ -79,6 +79,8 @@ static const char *brightdown[] = {"brightdown", NULL };
 static const char *brightup[] = {"brightup", NULL };
 static const char *keybdown[] = {"keybdown", NULL };
 static const char *keybup[] = {"keybup", NULL };
+static const char *smartshot[] = {"smartshot", NULL };
+static const char *dwmsuspend[] = {"dwmsuspend", NULL };
 
 
 
@@ -98,6 +100,8 @@ static Key keys[] = {
 	{ 0,							0x1008ff02,	spawn,     		{.v = brightup } },
 	{ 0,							0x1008ff05,	spawn,   	   {.v = keybup } },
 	{ 0,							0x1008ff06,	spawn,         {.v = keybdown } },
+	{ MODKEY|ShiftMask,				0x1008ff2c,	spawn,         {.v = dwmsuspend } },
+	{ MODKEY|ShiftMask,				XK_s,		spawn,         {.v = smartshot } },
 	{ MODKEY,                     	XK_f,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

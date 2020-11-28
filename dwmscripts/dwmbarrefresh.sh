@@ -28,6 +28,9 @@ WTOKEN=$(< /home/qwe/dwmscripts/dwmdarksky.txt)
 WICON=$(< /home/qwe/dwmscripts/dwmwicon.txt)
 YCON=$(echo $WICON)
 
+
+ALLWEATHER=$WICON$WTOKEN"C"
+
 #AMUTE="$(amixer | awk 'NR==5{print $6}')"
 #if [ $AMUTE == "[off]" ]
 #then
@@ -45,14 +48,14 @@ then
 elif [ $ATOKEN -gt 50 ]
 then
 	AICON=""
-	ATOKEN="$AICON$ATOKEN"
+	ATOKEN="$AICON$ATOKEN%"
 elif [ $ATOKEN == 0 ]
 then
 	AICON=""
 	ATOKEN="$AICON"
 else
 	AICON=""
-	ATOKEN="$AICON$ATOKEN"	
+	ATOKEN="$AICON$ATOKEN%"	
 fi
 
 
@@ -62,5 +65,5 @@ if [ $ELERT == 1 ]
 then
 	xsetroot -name "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!BATTEREY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 else
-	xsetroot -name "  $HDD | $RAM | $CPUTEMP | $BAT% | $UTOKEN | "$WICON" $WTOKEN C | $ATOKEN | $(date +%a\ %b%d\ %R)"
+	xsetroot -name "  $HDD | $RAM | $CPUTEMP | $BAT% | $UTOKEN | $ALLWEATHER | $ATOKEN | $(date +%a\ %b%d\ %R)"
 fi

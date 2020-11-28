@@ -10,7 +10,6 @@ binutils
 bison
 broadcom-wl-dkms
 calibre
-chromium
 clipmenu
 cmatrix
 cronie
@@ -28,10 +27,12 @@ gimp
 git
 groff
 grub
+grub-customizer
 gvim
 htop
 i3-gaps
 kdenlive
+kjv-git
 libtool
 light
 linux
@@ -73,10 +74,13 @@ tlp
 transmission-gtk
 ttf-dejavu
 ttf-font-awesome
+ttf-iosevka
+ttf-joypixels
 ttf-symbola
 udiskie
 udisks2
 ueberzug
+vul-git
 which
 xdg-user-dirs
 xdg-utils
