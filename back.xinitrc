@@ -81,7 +81,12 @@ while true; do
 	echo "$UTOKE" > /home/qwe/dwmscripts/dwmupdate.txt
 
 	#WEATHER
-	WNOW="$(curl -s wttr.in/98625?format=%f)"
+	#The oldmethod is here preserved, now I just take the icon directly from wttr.in... I MAY try to get the moonphase thing working again when the sun icon starts to annoy me but till then this will just werk.
+   WNOW="$(curl  wttr.in/98625?m | awk 'NR==4')"
+	WGUDD="${WNOW//[!0-9]/}"
+	echo $WGUDD
+
+
 	WGUDD="${WNOW//[!0-9]/}"
 	WGUD="$(echo $WGUDD - 32 | bc -l)"
 	echo "scale=0;$WGUD / 1.8" | bc -l > /home/qwe/dwmscripts/dwmweather.txt
@@ -91,10 +96,10 @@ while true; do
 	SRIZ="${SRIZZ//[!0-9]/}"
 	TNOW="$(date | awk '{print $4}')"
 	NOW="${TNOW//[!0-9]/}"
-	WWICON="$(curl -s wttr.in/Kalama,WA?format=%C)"
+	WWICON="$(curl -s wttr.in/98625?format=%C)"
 	if [ $NOW -gt $SRIZ ] && [ $NOW -lt $SSET ]
 	then
-		WICONN="$(curl -s wttr.in/Kalama,WA?format=%C)"
+		WICONN="$(curl -s wttr.in/98625?format=%C)"
 		WICON="$(cat /home/qwe/dwmscripts/allicons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
 	elif [ $WWICON == 'Clear']
 	then
@@ -112,7 +117,7 @@ while true; do
 		then
 			WICON="🌑"
 		elif [ $MPHAZ -lt 19 ]
-		then
+   		then
 			WICON="🌒"
 		elif [ $MPHAZ -lt 24 ]
 		then	
@@ -124,13 +129,14 @@ while true; do
 			WICON="🌕"
 		fi
 	else
-		WICONN="$(curl -s wttr.in/Kalama,WA?format=%C)"
+		WICONN="$(curl -s wttr.in/98625?format=%C)"
 		WICON="$(cat /home/qwe/dwmscripts/nighticons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
 
 		
 	fi
 	echo $WICON > /home/qwe/dwmscripts/dwmwicon.txt
 
+	/home/qwe/dwmscripts/weatherupdate.sh
 
 
 	#SLEEP
