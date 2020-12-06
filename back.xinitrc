@@ -82,6 +82,7 @@ while true; do
 
 	#WEATHER
 	#The oldmethod is here preserved, now I just take the icon directly from wttr.in... I MAY try to get the moonphase thing working again when the sun icon starts to annoy me but till then this will just werk.
+	#Be infomed I currently USE the old method...it just werks (and if it doesn't it's usually caused becaue the text conditions are spelled wrong or something like that. Fixeable I think in most cases...
    WNOW="$(curl  wttr.in/98625?m | awk 'NR==4')"
 	WGUDD="${WNOW//[!0-9]/}"
 	echo $WGUDD
@@ -97,11 +98,14 @@ while true; do
 	TNOW="$(date | awk '{print $4}')"
 	NOW="${TNOW//[!0-9]/}"
 	WWICON="$(curl -s wttr.in/98625?format=%C)"
+	CLEAR="Clear"
+	SUNNY="Sunny"
 	if [ $NOW -gt $SRIZ ] && [ $NOW -lt $SSET ]
 	then
-		WICONN="$(curl -s wttr.in/98625?format=%C)"
+		WICONNN="$(curl -s wttr.in/98625?format=%C)"
+		WICONN="$(echo $WICONNN | nocomma)"
 		WICON="$(cat /home/qwe/dwmscripts/allicons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
-	elif [ $WWICON == 'Clear']
+	elif [ $WWICON == $CLEAR ] || [ $WWICON == $SUNNY ]
 	then
 		MPHAZ="$(curl -s wttr.in/98625?format=%M)"
 		if [ $MPHAZ -lt 2 ]
@@ -129,7 +133,8 @@ while true; do
 			WICON="🌕"
 		fi
 	else
-		WICONN="$(curl -s wttr.in/98625?format=%C)"
+		WICONNN="$(curl -s wttr.in/98625?format=%C)"
+		WICONN="$(echo $WICONNN | nocomma)"
 		WICON="$(cat /home/qwe/dwmscripts/nighticons.txt | grep "$WICONN" | awk 'NR==1{print $NF}')"
 
 		

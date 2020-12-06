@@ -27,7 +27,8 @@ Heavy rain at times									🌧
 Heavy rain											🌧
 Light freezing rain									🌧
 Moderate or heavy freezing rain						🌧
-Light sleet											🌧					
+Light sleet											🌧		
+Rain												🌧		
 Moderate or heavy sleet								🌨
 Patchy light snow									🌨
 Light snow											🌨
@@ -50,13 +51,3 @@ Moderate or heavy rain with thunder					⛈
 Patchy light snow with thunder						⛈
 Moderate or heavy snow in area with thunder 		❄️ 🌩
 Moderate or heavy snow with thunder					❄️ 🌩
-
-
-
-
-
-Light rain, mist  											
-Light rain, mist,  											
-
-
-Cloudy,  											

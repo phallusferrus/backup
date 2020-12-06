@@ -9,19 +9,50 @@ CPUTEMP="$(sensors|awk 'BEGIN{i=0;t=0;b=0}/id [0-9]/{b=$4};/Core/{++i;t+=$3}END{
 #CTTOKEN="$(sensors | awk 'NR==3{print $3}')"
 #CPUFAN="${CTTOKEN//[!0-9]/}"
 ELERT=0
+###IDK why but acpi occasionally outputs TWO lines and other times only one...
+#BTOKEN="$(acpi | awk 'NR==2{print $4}')"
 BTOKEN="$(acpi | awk '{print $4}')"
 BAT="${BTOKEN//[!0-9]/}"
+#Batterey Icon
+#NOTE: The NR things like I said above IDK why acpi does taht shit man
+#CHARGE="$(acpi | awk 'NR==2{print $3}')"
+CHARGE="$(acpi | awk '{print $3}')"
+CHARGING="Charging,"
+FULL="Full,"
+if [ $CHARGE == $CHARGING ]
+then
+	BICON=''
+elif [ $CHARGE == $FULL ]
+then
+	BICON=''
+elif [ $BAT -gt 90 ]
+then
+	BICON=""
+elif [ $BAT -gt 70]
+then
+	BICON=""
+elif [ $BAT -gt 40 ]
+then
+	BICON=""
+elif [ $BAT -gt 15 ]
+then
+	BICON=""
+else
+	BICON=""
+fi
+ALLBAT=$BICON$BAT%
+
+
+
 #LOW BATTEREY ALERT - NOTICE SPECIFIC FORMAT FOR "CHARGING,"
 if [ $BAT -lt 15 ]
 then
-	charge="$(acpi | awk '{print $3}')"
-	if [[ $CHARGE != '
-Charging,
-' ]]
+	if [[ $CHARGE != $CHARGING ]]
 	then
 		ELERT=1
 	fi
 fi
+
 
 WTOKEN=$(< /home/qwe/dwmscripts/dwmdarksky.txt)
 
@@ -63,7 +94,7 @@ fi
 
 if [ $ELERT == 1 ] 
 then
-	xsetroot -name "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!BATTEREY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	xsetroot -name "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!BATTEREY$BAT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 else
-	xsetroot -name "  $HDD | $RAM | $CPUTEMP | $BAT% | $UTOKEN | $ALLWEATHER | $ATOKEN | $(date +%a\ %b%d\ %R)"
+	xsetroot -name "  $HDD | $RAM | $CPUTEMP | $ALLBAT | $UTOKEN | $ALLWEATHER | $ATOKEN | $(date +%a\ %b%d\ %R)"
 fi

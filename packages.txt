@@ -17,11 +17,15 @@ desmume
 devour
 dmenu
 dolphin-emu
+ecm-tools
 efibootmgr
+epsxe
 fakeroot
 feh
 firefox
 flex
+flightgear
+flightgear-data
 gcc
 gimp
 git
