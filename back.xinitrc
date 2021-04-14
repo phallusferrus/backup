@@ -111,22 +111,31 @@ while true; do
 		if [ $MPHAZ -lt 2 ]
 		then
 			WICON="🌕"
+		elif [ $MPHAZ -lt 7 ]
+		then
+			WICON="🌖"
+		elif [ $MPHAZ -lt 10 ]
+		then
+			WICON="🌗"
 		elif [ $MPHAZ -lt 13 ]
 		then
 			WICON="🌘"
+		elif [ $MPHAZ -lt 14 ]
+		then
+			WICON="🌑"
 		elif [ $MPHAZ == 14 ]
 		then
 			WICON="🌚"
 		elif [ $MPHAZ -lt 16 ]
 		then
 			WICON="🌑"
-		elif [ $MPHAZ -lt 19 ]
+		elif [ $MPHAZ -lt 20 ]
    		then
 			WICON="🌒"
-		elif [ $MPHAZ -lt 24 ]
+		elif [ $MPHAZ -lt 23 ]
 		then	
 			WICON="🌓"
-		elif [ $MPHAZ < 27 ]
+		elif [ $MPHAZ < 26 ]
 		then
 			WICON="🌔"
 		else
