@@ -1,5 +1,5 @@
-Sunny												☀
-Clear 												☀
+Sunny												
+Clear 												
 Partly cloudy										
 Cloudy  											
 Overcast											
@@ -14,7 +14,7 @@ Thundery outbreaks possible							🌩
 Blowing snow										🌨
 Blizzard											☃️
 Fog													
-Freezing fog										❄️
+Freezing fog  										
 Patchy light drizzle								🌦
 Light drizzle   									🌦
 Freezing drizzle									🌦
@@ -51,3 +51,4 @@ Moderate or heavy rain with thunder					⛈
 Patchy light snow with thunder						⛈
 Moderate or heavy snow in area with thunder 		❄️ 🌩
 Moderate or heavy snow with thunder					❄️ 🌩
+Unknown precipitation								🌧

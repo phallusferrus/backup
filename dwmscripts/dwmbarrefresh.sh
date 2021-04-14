@@ -9,14 +9,21 @@ CPUTEMP="$(sensors|awk 'BEGIN{i=0;t=0;b=0}/id [0-9]/{b=$4};/Core/{++i;t+=$3}END{
 #CTTOKEN="$(sensors | awk 'NR==3{print $3}')"
 #CPUFAN="${CTTOKEN//[!0-9]/}"
 ELERT=0
-###IDK why but acpi occasionally outputs TWO lines and other times only one...
-#BTOKEN="$(acpi | awk 'NR==2{print $4}')"
-BTOKEN="$(acpi | awk '{print $4}')"
+
+#RATECHECK is a shitfix for the acpi 1 vs 2 line return... and it werks!
+RATECHECK="$(acpi | awk 'NR==1{print $5}')"
+RATE='rate'
+if [ $RATECHECK == $RATE ]
+then
+	BTOKEN="$(acpi | awk 'NR==2{print $4}')"
+	CHARGE="$(acpi | awk 'NR==2{print $3}')"
+else
+	BTOKEN="$(acpi | awk '{print $4}')"
+	CHARGE="$(acpi | awk '{print $3}')"
+fi
 BAT="${BTOKEN//[!0-9]/}"
+
 #Batterey Icon
-#NOTE: The NR things like I said above IDK why acpi does taht shit man
-#CHARGE="$(acpi | awk 'NR==2{print $3}')"
-CHARGE="$(acpi | awk '{print $3}')"
 CHARGING="Charging,"
 FULL="Full,"
 if [ $CHARGE == $CHARGING ]
@@ -41,8 +48,6 @@ else
 	BICON=""
 fi
 ALLBAT=$BICON$BAT%
-
-
 
 #LOW BATTEREY ALERT - NOTICE SPECIFIC FORMAT FOR "CHARGING,"
 if [ $BAT -lt 15 ]
