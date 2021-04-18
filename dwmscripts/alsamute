@@ -4,8 +4,8 @@
 amixer -D pulse set Master 1+ toggle
 
 
-AMUTE="$(amixer | awk 'NR==5{print $6}')"
-if [ $AMUTE == "[off]" ]
+AMUTE="$(pacmd list-sinks | awk 'NR==13{print $2}')"
+if [ $AMUTE == "yes" ]
 then
 	ATOKEN="M"
 else
